@@ -4,8 +4,9 @@ import requests
 
 def currency_converter():
     st.header('Currency Converter')
-    key = st.text_input('Enter your API key')
-    get_country_code(key)
+    key = st.text_input('Enter your API key', value='YourAPIKey')
+    if key:
+        get_country_code(key)
 
 
 
