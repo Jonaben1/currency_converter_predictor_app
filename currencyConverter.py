@@ -4,9 +4,8 @@ import requests
 
 def currency_converter():
     st.header('Currency Converter')
-    key = st.text_input('Enter your API key', value='YourAPIKey')
-    if key:
-        get_country_code(key)
+    key = st.text_input('Enter your API key')
+    return get_country_code(key)
 
 
 
@@ -24,9 +23,8 @@ def get_country_code(key):
     base = st.selectbox('Enter the base currency', code)
     target = st.selectbox('Enter the target currency', code)
     amount = st.number_input('Enter the amount')
-    if base != target:
-        if st.button('Convert'):
-            converter(base, target, amount, key)
+    if st.button('Convert'):
+        converter(base, target, amount, key)
 
 
 
