@@ -5,21 +5,7 @@ import requests
 def currency_converter():
     st.header('Currency Converter')
     key = st.text_input('Enter your API key')
-
-    country = get_country_code(key)
-
-    code = []
-    for i in country:
-        code.append(i[0])
-
-    base = st.selectbox('Enter the base currency', code)
-    target = st.selectbox('Enter the target currency', code)
-    amount = st.number_input('Enter the amount')
-    if base == target:
-        st.error('Not applicable!')
-        return None
-    if st.button('Convert'):
-        converter(base, target, amount, key)
+    get_country_code(key)
 
 
 
@@ -28,8 +14,19 @@ def currency_converter():
 def get_country_code(key):
     url = f'https://v6.exchangerate-api.com/v6/{key}/codes'
     res = requests.get(url).json()
-    result = res['supported_codes']
-    return result
+    country = res['supported_codes']
+
+    code = []
+    for i in country:
+        code.append(i[0])
+
+    base = st.selectbox('Enter the base currency', code)
+    target = st.selectbox('Enter the target currency', code)
+    amount = st.number_input('Enter the amount')
+    if base != target:
+        if st.button('Convert'):
+            converter(base, target, amount, key)
+
 
 
 def converter(base, target, amount, key):
