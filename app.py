@@ -1,7 +1,6 @@
 import streamlit as st
 from currencyConverter import currency_converter
-
-
+from model import predict
 
 
 def main():
@@ -10,8 +9,7 @@ def main():
     if op == 'convert':
         currency_converter()
     else:
-        pass
-
+        predict()
 
 
 
